@@ -1,0 +1,499 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2024-03-25T22:14:54.839Z",
+  "__export_source": "insomnia.desktop.app:v8.6.1",
+  "resources": [
+    {
+      "_id": "req_02d76b079ba4497a8338b040a9a932ff",
+      "parentId": "wrk_cd7c84779e86436b96dc590c8f3dd05d",
+      "modified": 1711404811506,
+      "created": 1711401416621,
+      "url": "{{ _.riverscapesUrl }}",
+      "name": "searchUsers_query",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"query searchUsers_query($searchParams: SearchParamsInput!, $sort: [SearchSortEnum!]) {\\n  searchUsers(limit: 100, offset: 0, params: $searchParams, sort: $sort) {\\n    results {\\n      item {\\n          ...dbobj  \\n      }\\n      score\\n      highlights\\n    }\\n    ...searchPaginated\\n  }\\n}\\n\\n\\nfragment dbobjSm on DBObj {\\n  id\\n  name\\n}\\n\\nfragment dbobj on DBObj {\\n  id\\n  name\\n  summary\\n  description\\n  createdBy {\\n    ...dbobjSm\\n  }\\n  updatedBy {\\n    ...dbobjSm\\n  }\\n  createdOn\\n  updatedOn\\n  meta {\\n    key\\n    type\\n    value\\n  }\\n}\\n\\nfragment searchPaginated on SearchPagination {\\n  total\\n  stats {\\n    ... on ProjectSearchMeta {\\n      searchTime\\n      area\\n      bbox\\n      geoBuckets\\n      maxScore\\n      metaDataBuckets\\n      projectTypes\\n    }\\n    __typename\\n  }\\n    limit\\n    offset\\n}\\n\",\"operationName\":\"searchUsers_query\",\"variables\":{\"searchParams\":{},\"sort\":[]}}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_1f5cfc61c2b34c77935d2029af773e62"
+        }
+      ],
+      "authentication": {
+        "type": "oauth2",
+        "grantType": "authorization_code",
+        "accessTokenUrl": "{{ _.Auth.authDomain }}/oauth/token",
+        "clientId": "{{ _.Auth.clientId }}",
+        "clientSecret": "",
+        "scope": "offline_access",
+        "credentialsInBody": true,
+        "redirectUrl": "{{ _.Auth.redirectUrl }}",
+        "usePkce": true,
+        "authorizationUrl": "{{ _.Auth.authDomain }}/authorize?audience=https://api.riverscapes.net"
+      },
+      "metaSortKey": -1681238569569.5,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "wrk_cd7c84779e86436b96dc590c8f3dd05d",
+      "parentId": null,
+      "modified": 1711401416566,
+      "created": 1711401416566,
+      "name": "Riverscapes-DEMO",
+      "description": "",
+      "scope": "design",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_ef46262b2f9a4655b2acee021f83e9a0",
+      "parentId": "wrk_cd7c84779e86436b96dc590c8f3dd05d",
+      "modified": 1711404813137,
+      "created": 1711404290553,
+      "url": "{{ _.riverscapesUrl }}",
+      "name": "collectionProjects",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"query collectionProjects($collectionId: ID!, $limit: Int!, $offset: Int!) {\\n  collection(id: $collectionId) {\\n    id\\n    name\\n    projects(limit: $limit, offset: $offset) {\\n      total\\n      items {\\n        id\\n        name\\n        projectType {\\n          id\\n        }\\n      }\\n    }\\n  }\\n}\\n\",\"operationName\":\"collectionProjects\",\"variables\":\"{\\n  \\\"collectionId\\\": \\\"e1f9735f-5481-4e55-8540-8b9cac49ca44\\\",\\n  \\\"limit\\\": 50,\\n  \\\"offset\\\": 0\\n}\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_1f5cfc61c2b34c77935d2029af773e62"
+        }
+      ],
+      "authentication": {
+        "type": "oauth2",
+        "grantType": "authorization_code",
+        "accessTokenUrl": "{{ _.Auth.authDomain }}/oauth/token",
+        "clientId": "{{ _.Auth.clientId }}",
+        "clientSecret": "",
+        "scope": "offline_access",
+        "credentialsInBody": true,
+        "redirectUrl": "{{ _.Auth.redirectUrl }}",
+        "usePkce": true,
+        "authorizationUrl": "{{ _.Auth.authDomain }}/authorize?audience=https://api.riverscapes.net"
+      },
+      "metaSortKey": -1681238569519.5,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_ebbb27a07b4f495b868fdd8d4d8c9c0c",
+      "parentId": "wrk_cd7c84779e86436b96dc590c8f3dd05d",
+      "modified": 1711404814638,
+      "created": 1711404441817,
+      "url": "{{ _.riverscapesUrl }}",
+      "name": "getProjectFull",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"query getProjectFull($id: ID!) {\\n  project(id: $id) {\\n    ...dbobj\\n    bounds {\\n      bbox\\n      centroid\\n      polygonUrl\\n    }\\n    heroImage {\\n      lg\\n      md\\n      sm\\n    }\\n    ownedBy {\\n      ...dbobjSm\\n    }\\n    citation\\n    datasets(limit: 200, offset: 0) {\\n      items {\\n        ...dataset\\n      }\\n      ...paginated\\n    }\\n    permissions {\\n      delete\\n      update\\n      view\\n    }\\n    projectType {\\n      ...dbobjSm\\n    }\\n    qaqc(limit: 10, offset: 0) {\\n      ...paginated\\n      items {\\n        ...dbobj\\n        datePerformed\\n        performedBy\\n        state\\n        supportingLinks {\\n          alt\\n          href\\n          text\\n        }\\n      }\\n    }\\n    sponsor {\\n      ...dbobjSm\\n    }\\n    collections(offset: 0, limit: 50) {\\n      items {\\n        ...dbobjSm\\n      }\\n      ...paginated\\n    }\\n    starred\\n    starredCount\\n    tags\\n    totalSize\\n    visibility\\n    files {\\n      localPath\\n      size\\n      contentType\\n    }\\n    tree {\\n      defaultView\\n      description\\n      leaves {\\n        blLayerId\\n        id\\n        label\\n        #         layerId\\n        #         layerName\\n        #         layerPath\\n        layerType\\n        #         metaStr\\n        #         nodeExists\\n        pid\\n        symbology\\n        transparency\\n      }\\n      branches {\\n        bid\\n        collapsed\\n        label\\n        pid\\n      }\\n    }\\n  }\\n}\\n\\nfragment paginated on Pagination {\\n  limit\\n  offset\\n  total\\n}\\n\\nfragment dbobjSm on DBObj {\\n  id\\n  name\\n}\\n\\nfragment dataset on Dataset {\\n  ...dbobj\\n  citation\\n\\n  rsXPath\\n  layers {\\n    lyrName\\n    citation\\n    meta {\\n      key\\n      type\\n      value\\n    }\\n    name\\n    summary\\n  }\\n  origin {\\n    id\\n  }\\n  files {\\n    contentType\\n    downloadUrl\\n    #     md5\\n  }\\n}\\n\\nfragment dbobj on DBObj {\\n  id\\n  name\\n  summary\\n  description\\n  createdBy {\\n    id\\n    name\\n  }\\n  updatedBy {\\n    id\\n    name\\n  }\\n  createdOn\\n  updatedOn\\n  meta {\\n    key\\n    type\\n    value\\n  }\\n}\\n\",\"operationName\":\"getProjectFull\",\"variables\":\"{\\n\\t\\\"id\\\": \\\"40172c83-cf87-4890-9568-cd982e0f46c3\\\"\\n}\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_1f5cfc61c2b34c77935d2029af773e62"
+        }
+      ],
+      "authentication": {
+        "type": "oauth2",
+        "grantType": "authorization_code",
+        "accessTokenUrl": "{{ _.Auth.authDomain }}/oauth/token",
+        "clientId": "{{ _.Auth.clientId }}",
+        "clientSecret": "",
+        "scope": "offline_access",
+        "credentialsInBody": true,
+        "redirectUrl": "{{ _.Auth.redirectUrl }}",
+        "usePkce": true,
+        "authorizationUrl": "{{ _.Auth.authDomain }}/authorize?audience=https://api.riverscapes.net"
+      },
+      "metaSortKey": -1681238569494.5,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_3c42d0c33b8646babcdac8def4f77fd2",
+      "parentId": "wrk_cd7c84779e86436b96dc590c8f3dd05d",
+      "modified": 1711404816071,
+      "created": 1711404501943,
+      "url": "{{ _.riverscapesUrl }}",
+      "name": "projectDatasets",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"query projectFiles($projectId: ID!, $limit: Int!, $offset: Int!) {\\n  project(id: $projectId) {\\n    id\\n    datasets(limit: $limit, offset: $offset) {\\n      total\\n      items {\\n        id\\n        datasetXMLId\\n        localPath\\n        name\\n        datasetType\\n      }\\n    }\\n  }\\n}\\n\",\"operationName\":\"projectFiles\",\"variables\":\"{\\n\\t\\\"projectId\\\": \\\"40172c83-cf87-4890-9568-cd982e0f46c3\\\",\\n\\t\\\"limit\\\": 50,\\n\\t\\\"offset\\\": 0\\n}\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_1f5cfc61c2b34c77935d2029af773e62"
+        }
+      ],
+      "authentication": {
+        "type": "oauth2",
+        "grantType": "authorization_code",
+        "accessTokenUrl": "{{ _.Auth.authDomain }}/oauth/token",
+        "clientId": "{{ _.Auth.clientId }}",
+        "clientSecret": "",
+        "scope": "offline_access",
+        "credentialsInBody": true,
+        "redirectUrl": "{{ _.Auth.redirectUrl }}",
+        "usePkce": true,
+        "authorizationUrl": "{{ _.Auth.authDomain }}/authorize?audience=https://api.riverscapes.net"
+      },
+      "metaSortKey": -1681238569482,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_e03b7082adb24687bdeefa959a2bd949",
+      "parentId": "wrk_cd7c84779e86436b96dc590c8f3dd05d",
+      "modified": 1711404817604,
+      "created": 1711404579594,
+      "url": "{{ _.riverscapesUrl }}",
+      "name": "projectFiles",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"query projectFiles($projectId: ID!) {\\n  project(id: $projectId) {\\n    id\\n    files {\\n      size\\n      contentType\\n      downloadUrl\\n      localPath\\n      etag\\n    }\\n  }\\n}\\n\",\"operationName\":\"projectFiles\",\"variables\":\"{\\n\\t\\\"projectId\\\": \\\"40172c83-cf87-4890-9568-cd982e0f46c3\\\"\\n}\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_1f5cfc61c2b34c77935d2029af773e62"
+        }
+      ],
+      "authentication": {
+        "type": "oauth2",
+        "grantType": "authorization_code",
+        "accessTokenUrl": "{{ _.Auth.authDomain }}/oauth/token",
+        "clientId": "{{ _.Auth.clientId }}",
+        "clientSecret": "",
+        "scope": "offline_access",
+        "credentialsInBody": true,
+        "redirectUrl": "{{ _.Auth.redirectUrl }}",
+        "usePkce": true,
+        "authorizationUrl": "{{ _.Auth.authDomain }}/authorize?audience=https://api.riverscapes.net"
+      },
+      "metaSortKey": -1681238569475.75,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_4f7cb42f592c40d59b191063c6c35031",
+      "parentId": "wrk_cd7c84779e86436b96dc590c8f3dd05d",
+      "modified": 1711404819036,
+      "created": 1711404607978,
+      "url": "{{ _.riverscapesUrl }}",
+      "name": "projectTypes",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"query projectTypes_query($limit: Int!, $offset: Int!) {\\n  projectTypes(limit: $limit, offset: $offset) {\\n    items {\\n      ... on ProjectType {\\n        ...dbobj\\n        url\\n        machineName\\n        state\\n        logo\\n      }\\n    }\\n    total\\n  }\\n}\\n\\nfragment dbobj on DBObj {\\n  name\\n  summary\\n  description\\n  meta {\\n    key\\n    type\\n    value\\n  }\\n}\\n\",\"operationName\":\"projectTypes_query\",\"variables\":\"{\\n  \\\"limit\\\": 50,\\n  \\\"offset\\\": 0\\n}\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_1f5cfc61c2b34c77935d2029af773e62"
+        }
+      ],
+      "authentication": {
+        "type": "oauth2",
+        "grantType": "authorization_code",
+        "accessTokenUrl": "{{ _.Auth.authDomain }}/oauth/token",
+        "clientId": "{{ _.Auth.clientId }}",
+        "clientSecret": "",
+        "scope": "offline_access",
+        "credentialsInBody": true,
+        "redirectUrl": "{{ _.Auth.redirectUrl }}",
+        "usePkce": true,
+        "authorizationUrl": "{{ _.Auth.authDomain }}/authorize?audience=https://api.riverscapes.net"
+      },
+      "metaSortKey": -1681238569472.625,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_ef56fb7c38a9408a9a48c89e222bc76c",
+      "parentId": "wrk_cd7c84779e86436b96dc590c8f3dd05d",
+      "modified": 1711404820468,
+      "created": 1711404646985,
+      "url": "{{ _.riverscapesUrl }}",
+      "name": "searchCount",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"query searchProjects_query(\\n  $searchParams: ProjectSearchParamsInput!\\n  $sort: [SearchSortEnum!]\\n  $limit: Int!\\n  $offset: Int!\\n) {\\n  searchProjects(\\n    limit: $limit\\n    offset: $offset\\n    params: $searchParams\\n    sort: $sort\\n  ) {\\n    total\\n    stats {\\n      ... on ProjectSearchMeta {\\n        searchTime\\n        area\\n        bbox\\n        geoBuckets\\n        maxScore\\n        metaDataBuckets\\n        projectTypes\\n      }\\n      __typename\\n    }\\n  }\\n}\\n\",\"operationName\":\"searchProjects_query\",\"variables\":\"{\\n  \\\"searchParams\\\": {\\n      \\\"projectTypeId\\\": \\\"vbet\\\",  \\n  \\\"bbox\\\": [-125.40936477595693, 45.38966396117303, -116.21237724715607, 49.470853578429626]\\n  },\\n  \\\"sort\\\": [],\\n\\t\\\"limit\\\": 50,\\n\\t\\\"offset\\\": 0\\n}\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_1f5cfc61c2b34c77935d2029af773e62"
+        }
+      ],
+      "authentication": {
+        "type": "oauth2",
+        "grantType": "authorization_code",
+        "accessTokenUrl": "{{ _.Auth.authDomain }}/oauth/token",
+        "clientId": "{{ _.Auth.clientId }}",
+        "clientSecret": "",
+        "scope": "offline_access",
+        "credentialsInBody": true,
+        "redirectUrl": "{{ _.Auth.redirectUrl }}",
+        "usePkce": true,
+        "authorizationUrl": "{{ _.Auth.authDomain }}/authorize?audience=https://api.riverscapes.net"
+      },
+      "metaSortKey": -1681238569471.0625,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_6aa9593cdf5345ae9f51361c62e479fc",
+      "parentId": "wrk_cd7c84779e86436b96dc590c8f3dd05d",
+      "modified": 1711404822003,
+      "created": 1711404742563,
+      "url": "{{ _.riverscapesUrl }}",
+      "name": "searchProjects",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"query searchProjects_query(\\n  $searchParams: ProjectSearchParamsInput!\\n  $sort: [SearchSortEnum!]\\n  $limit: Int!\\n  $offset: Int!\\n) {\\n  searchProjects(\\n    limit: $limit\\n    offset: $offset\\n    params: $searchParams\\n    sort: $sort\\n  ) {\\n    results {\\n      item {\\n        id\\n        name\\n        tags\\n        visibility\\n        meta {\\n          key\\n          value\\n        }\\n        projectType {\\n          id\\n        }\\n        createdOn\\n        updatedOn\\n        ownedBy {\\n          ... on Organization {\\n            id\\n            name\\n          }\\n          ... on User {\\n            id\\n            name\\n          }\\n          __typename\\n        }\\n      }\\n    }\\n    total\\n    stats {\\n      ... on ProjectSearchMeta {\\n        searchTime\\n        area\\n        bbox\\n        geoBuckets\\n        maxScore\\n        metaDataBuckets\\n        projectTypes\\n      }\\n      __typename\\n    }\\n  }\\n}\\n\",\"operationName\":\"searchProjects_query\",\"variables\":\"{\\n  \\\"searchParams\\\": {\\n      \\\"projectTypeId\\\": \\\"vbet\\\",  \\n  \\\"bbox\\\": [-125.40936477595693, 45.38966396117303, -116.21237724715607, 49.470853578429626]\\n  },\\n  \\\"sort\\\": [],\\n\\t\\\"limit\\\": 50,\\n\\t\\\"offset\\\": 0\\n}\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_1f5cfc61c2b34c77935d2029af773e62"
+        }
+      ],
+      "authentication": {
+        "type": "oauth2",
+        "grantType": "authorization_code",
+        "accessTokenUrl": "{{ _.Auth.authDomain }}/oauth/token",
+        "clientId": "{{ _.Auth.clientId }}",
+        "clientSecret": "",
+        "scope": "offline_access",
+        "credentialsInBody": true,
+        "redirectUrl": "{{ _.Auth.redirectUrl }}",
+        "usePkce": true,
+        "authorizationUrl": "{{ _.Auth.authDomain }}/authorize?audience=https://api.riverscapes.net"
+      },
+      "metaSortKey": -1681238569470.2812,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "env_ff427c74285948e6bae60c91b4902e06",
+      "parentId": "wrk_cd7c84779e86436b96dc590c8f3dd05d",
+      "modified": 1711404010835,
+      "created": 1711401416567,
+      "name": "Base Environment",
+      "data": {
+        "dotenvFilePath": "~/.env.insomnia.riverscapes",
+        "Auth": {
+          "authDomain": "https://dev-1redlpx2nwsh6a4j.us.auth0.com",
+          "clientId": "pH1ADlGVi69rMozJS1cixkuL5DMVLhKC",
+          "APIAuddience": "https://api.riverscapes.net",
+          "redirectUrl": "http://localhost:3000"
+        },
+        "riverscapesUrl": "https://api.data.riverscapes.net",
+        "riverscapesAuthUrl": "https://api.data.riverscapes.net/token"
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "dotenvFilePath",
+          "Auth",
+          "riverscapesUrl",
+          "riverscapesAuthUrl"
+        ],
+        "&~|Auth": [
+          "authDomain",
+          "clientId",
+          "APIAuddience",
+          "redirectUrl"
+        ]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1645056103245,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_4ec4415744f143118b0e19b8edeb4cef",
+      "parentId": "wrk_cd7c84779e86436b96dc590c8f3dd05d",
+      "modified": 1711404166578,
+      "created": 1711401416571,
+      "name": "Default Jar",
+      "cookies": [
+        {
+          "key": "XSRF-TOKEN",
+          "value": "aa4f0fc1-ab1a-41d2-81dd-638847a23f09",
+          "domain": "rs-warehouse.auth.us-west-2.amazoncognito.com",
+          "path": "/",
+          "secure": true,
+          "httpOnly": true,
+          "extensions": [
+            "SameSite=Lax"
+          ],
+          "hostOnly": true,
+          "creation": "2022-04-08T22:03:17.429Z",
+          "lastAccessed": "2022-04-08T22:03:17.429Z",
+          "id": "a170daa2-25e0-460f-952c-fbffe149dd98"
+        },
+        {
+          "key": "XSRF-TOKEN",
+          "value": "36c480aa-fda9-4f7d-9514-5eefd11a0976",
+          "domain": "riverscapes.auth.us-west-2.amazoncognito.com",
+          "path": "/",
+          "secure": true,
+          "httpOnly": true,
+          "extensions": [
+            "SameSite=Lax"
+          ],
+          "hostOnly": true,
+          "creation": "2023-01-06T20:27:08.985Z",
+          "lastAccessed": "2023-01-06T20:27:08.985Z",
+          "id": "c61de9ac-4431-4348-af2e-473533cadbcf"
+        },
+        {
+          "key": "did",
+          "value": "s%3Av0%3A69a6ddc0-eaf3-11ee-856e-c5bce46627a7.wkXxKlyTX1CorryHdlhbKMijipsy8wFahNjXIfQI20Q",
+          "expires": "2025-03-26T04:02:46.000Z",
+          "maxAge": 31557600,
+          "domain": "dev-1redlpx2nwsh6a4j.us.auth0.com",
+          "path": "/",
+          "secure": true,
+          "httpOnly": true,
+          "hostOnly": true,
+          "creation": "2023-01-30T19:48:27.304Z",
+          "lastAccessed": "2024-03-25T22:02:46.577Z",
+          "sameSite": "none",
+          "id": "d3067dba-eb05-4345-9df9-3849afe80818"
+        },
+        {
+          "key": "did_compat",
+          "value": "s%3Av0%3A69a6ddc0-eaf3-11ee-856e-c5bce46627a7.wkXxKlyTX1CorryHdlhbKMijipsy8wFahNjXIfQI20Q",
+          "expires": "2025-03-26T04:02:46.000Z",
+          "maxAge": 31557600,
+          "domain": "dev-1redlpx2nwsh6a4j.us.auth0.com",
+          "path": "/",
+          "secure": true,
+          "httpOnly": true,
+          "hostOnly": true,
+          "creation": "2023-01-30T19:48:27.305Z",
+          "lastAccessed": "2024-03-25T22:02:46.577Z",
+          "id": "ca3026e7-541f-4967-996e-305286a47c57"
+        },
+        {
+          "key": "__cf_bm",
+          "value": "itmCtiknFiCr3YdX9pf1kIgRcpPKaNUslEd4Lzrc5JI-1705943478-1-ASxdljKRcJe5edtazFznKX+3fTkoM3MJUnoTaKpPuAajRm/pOr6ji3CPoRKWKlQoBiiQ6/fkbij2WzlxsS0gsw8=",
+          "expires": "2024-01-22T17:41:18.000Z",
+          "domain": "us.auth0.com",
+          "path": "/",
+          "secure": true,
+          "httpOnly": true,
+          "hostOnly": false,
+          "creation": "2024-01-22T17:11:18.299Z",
+          "lastAccessed": "2024-01-22T17:11:18.299Z",
+          "sameSite": "none",
+          "id": "c96c32db-9b6a-441f-a0a9-9c06c00836fc"
+        }
+      ],
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "spc_d77b72050d684a698d02ea1f0d7c8021",
+      "parentId": "wrk_cd7c84779e86436b96dc590c8f3dd05d",
+      "modified": 1711401416678,
+      "created": 1711401416572,
+      "fileName": "Riverscapes-DEMO",
+      "contents": "",
+      "contentType": "yaml",
+      "_type": "api_spec"
+    }
+  ]
+}
