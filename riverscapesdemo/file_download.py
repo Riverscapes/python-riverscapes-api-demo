@@ -17,7 +17,7 @@ def download_files(riverscapes_api: RiverscapesAPI):
     # ================================================================================================================
 
     # Load the search params from a JSON file so we don't have to hardcode them
-    search_params = RiverscapesSearchParams.load_from_json(os.path.join(os.path.dirname(__file__), '..', '..', 'inputs', 'download_files_search.json'))
+    search_params = RiverscapesSearchParams.load_from_json(os.path.join(os.path.dirname(__file__), '..', 'inputs', 'download_files_search.json'))
 
     default_dir = os.path.join(os.path.expanduser("~"), 'DownloadedFiles', riverscapes_api.stage)
     questions = [
@@ -28,7 +28,7 @@ def download_files(riverscapes_api: RiverscapesAPI):
     safe_makedirs(download_dir)
 
     # NOTE: File filters is a list of regexes. If any one of the regexes matches any file in a project it will be downloaded
-    file_filters = [r'.*brat\.gpkg']
+    file_filters = [r'.*vbet\.gpkg']
 
     # Make the search and download all necessary files
     # ================================================================================================================
